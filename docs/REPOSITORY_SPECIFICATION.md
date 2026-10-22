@@ -1,6 +1,6 @@
 # Repository specification: aether-ai-queue
 
-**Status:** Documentation baseline copied from the Aether AI master specification. Implementation status must be verified separately.
+**Status:** Repository exists; documentation-only on the inspected `main` branch. No application implementation is present in the audited tree.
 
 ## Mission
 
@@ -8,7 +8,7 @@ Queue abstraction, versioned message envelopes, retry/dead-letter semantics, and
 
 ## Dependencies and connections
 
-Selected queue adapter (TBD), versioned neutral message envelopes, and an optional low-level telemetry interface. Orchestration, workflows and billing are producers/consumers of queue contracts; the queue implementation must not import their domain packages.
+Neutral queue producer/consumer contract; do not import orchestration, billing, or consumer implementations.
 
 ## Direction and ownership rule
 
