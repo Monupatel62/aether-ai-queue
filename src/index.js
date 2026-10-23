@@ -8,6 +8,13 @@ export class QueueContractError extends Error {
 }
 function isRecord(value) { return value !== null && typeof value === "object" && !Array.isArray(value); }
 function validId(value) { return typeof value === "string" && ID.test(value) && value.trim() === value; }
+function deepFreeze(value) {
+  if (value && typeof value === "object" && !Object.isFrozen(value)) {
+    for (const child of Object.values(value)) deepFreeze(child);
+    Object.freeze(value);
+  }
+  return value;
+}
 function safeJsonSize(value) {
   try { return Buffer.byteLength(JSON.stringify(value)); }
   catch { throw new QueueContractError("invalid_payload", "Message payload must be JSON-serializable"); }
@@ -31,7 +38,7 @@ export function createEnvelope({ type, schemaVersion = 1, tenantId, payload, ide
     idempotencyKey,
     correlationId: correlationId ?? null,
     createdAt: now,
-    payload: Object.freeze(JSON.parse(JSON.stringify(payload))),
+    payload: deepFreeze(JSON.parse(JSON.stringify(payload))),
   });
 }
 
