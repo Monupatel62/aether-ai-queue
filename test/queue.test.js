@@ -37,3 +37,12 @@ test("rejects invalid jitter and attempt numbers", () => {
   assert.throws(() => retryDelayMs(policy, 1, 2), QueueContractError);
   assert.equal(retryDelayMs(policy, 0), null);
 });
+
+
+test("deep-freezes normalized nested payloads", () => {
+  const envelope = createEnvelope({ type: "job.created", tenantId: "tenant-a", idempotencyKey: "key-1", payload: { nested: { values: [1, 2] } }, now: 10 });
+  assert.equal(Object.isFrozen(envelope.payload), true);
+  assert.equal(Object.isFrozen(envelope.payload.nested), true);
+  assert.equal(Object.isFrozen(envelope.payload.nested.values), true);
+  assert.throws(() => envelope.payload.nested.values.push(3), TypeError);
+});
