@@ -2,7 +2,7 @@
 
 Queue abstraction, versioned message envelopes, retry/dead-letter semantics, and worker delivery guarantees.
 
-**Status:** Documentation foundation only; no implementation or deployment is claimed.
+**Status:** Initial queue envelope and retry-policy utilities are in review; no broker adapter or worker runtime is implemented.
 
 ## Docs
 
@@ -15,6 +15,7 @@ Queue abstraction, versioned message envelopes, retry/dead-letter semantics, and
 - [Research and licenses](docs/RESEARCH_AND_LICENSES.md)
 - [Engineering standard](docs/ENGINEERING_STANDARD.md)
 - [Work log](docs/WORKLOG.md)
+- Initial implementation: bounded versioned envelope validation and deterministic exponential retry delay helper.
 
 - [Master catalog](https://github.com/Monupatel62/aether-ai-platform/blob/main/docs/REPOSITORY_CATALOG.md)
 - [Master architecture](https://github.com/Monupatel62/aether-ai-platform/blob/main/docs/MASTER_ARCHITECTURE.md)
